@@ -1,3 +1,11 @@
+# Add argparse support
+# Add timeout option
+# Add output file
+# Choose to verbose
+# Choose what responses to output
+# Add basic responses to help
+# Fix exception
+
 import os
 import sys
 import re
@@ -32,10 +40,10 @@ def helpScreen():
 
 def urlScan(url):
     try:
-        r = requests.get(url)
+        r = requests.get(url) #timeout=1
         print('[' + str(r.status_code) + '] ' + url)
     except requests.ConnectionError:
-        print("failed to connect: " + url)
+        print("[ERR] " + url)
 
 
 def formatUrl(url):
