@@ -3,7 +3,7 @@
 # Add output file
 # Choose to verbose
 # Choose what responses to output
-# Add basic responses to help
+# Add basic responses to help (maybe using another python script?)
 # Fix exception
 
 import os
