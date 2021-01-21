@@ -58,8 +58,7 @@ def format_url(url):
 if os.path.exists(args.domain_list):
     with open(str(args.domain_list)) as url_list:  # opens the file
         for line in url_list:
-            url = format_url(line)
-            url_scan(url)
+            url_scan(format_url(line))
 else:
     print("File does not exist")
     os._exit(0)
