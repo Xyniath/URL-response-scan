@@ -13,8 +13,8 @@ import requests
 import argparse
 
 parser = argparse.ArgumentParser()
-parser.add_argument("domainlist", help = "file path of domain list")
-parser.add_argument("-t", "--timeout", help = "timeout in seconds (default 20)")
+parser.add_argument("domain_list", help="file path of domain list")
+parser.add_argument("-t", "--timeout", help="timeout in seconds (default 20)")
 args = parser.parse_args()
 
 introart = """
@@ -34,13 +34,14 @@ green = "\033[1;32m"
 red = "\033[1;31m"
 clear = "\033[0m"
 
-load = "[>$<] ".replace(">", red).replace("<", clear)
+load = "[>$<] ".replace(">", green).replace("<", clear)
 err = "[>-<] ".replace(">", red).replace("<", clear)
-intro = introart.replace(">", red).replace("<", clear)
+intro = introart.replace(">", green).replace("<", clear)
 
 print(intro)
 
-def urlScan(url):
+
+def url_scan(url):
     try:
         r = requests.get(url, timeout=20)
         print('[' + str(r.status_code) + '] ' + url)
@@ -48,16 +49,17 @@ def urlScan(url):
         print("[ERR] " + url)
 
 
-def formatUrl(url):
+def format_url(url):
     if not re.match('(?:http|ftp|https)://', url):
         return 'http://{}'.format(url)
     return url
 
-if os.path.exists(args.domainlist):
-    with open(str(args.domainlist)) as urlList:  # opens the file
-        for line in urlList:
-            url = formatUrl(line)
-            urlScan(url)
+
+if os.path.exists(args.domain_list):
+    with open(str(args.domain_list)) as url_list:  # opens the file
+        for line in url_list:
+            url = format_url(line)
+            url_scan(url)
 else:
     print("File does not exist")
     os._exit(0)
